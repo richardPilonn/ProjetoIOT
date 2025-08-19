@@ -6,7 +6,7 @@
     <div class="d-flex flex-row justify-content-end">
         <a href="{{ route('ambiente.create') }}" class="btn btn-outline-primary mb-3 btn-sm"
             style="border-radius: 0.25rem; height: 38px; padding-top: 6px; min-width: 140px;">
-            <i class="bi bi-person-add"></i> Novo Ambientes
+            <i class="bi bi-person-add"></i> Novo Ambiente
         </a>
     </div>
     @if(session()->has('error'))
@@ -47,6 +47,7 @@
                 <th>Nome</th>
                 <th>Descricao</th>
                 <th>Status</th>
+                <th>acoes</th>
             </tr>
         </thead>
         <tbody>
@@ -70,36 +71,4 @@
             @endforelse
         </tbody>
     </table>
-
-    <div class="d-flex flex-column align-items-center mt-3">
-        <div class="mb-2">
-            Mostrando {{ $ambiente->firstItem() }} até {{ $ambiente->lastItem() }} de
-            {{ $ambiente->total() }} resultados
-        </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-
-                <li class="page-item {{ $ambiente->onFirstPage() ? 'disabled' : '' }}">
-                    <a href="#" class="page-link" wire:click.prevent="previousPage" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-
-                @foreach ($ambientes->getUrlRange(1, $ambiente->lastPage()) as $page => $url)
-                    <li class="page-item {{ $ambiente->currentPage() == $page ? 'active' : '' }}">
-                        <a href="#" class="page-link"
-                            wire:click.prevent="gotoPage({{ $page }})">{{ $page }}</a>
-                    </li>
-                @endforeach
-
-                <li class="page-item {{ $ambiente->hasMorePages() ? '' : 'disabled' }}">
-                    <a href="#" class="page-link" wire:click.prevent="nextPage" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-    </div>
-
 </div>

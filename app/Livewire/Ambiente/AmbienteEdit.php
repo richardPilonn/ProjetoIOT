@@ -27,7 +27,6 @@ class AmbienteEdit extends Component
     }
 
     public function update() { 
-        $this->validade();
 
         $ambiente = Ambiente::find($this->ambienteId);
 
@@ -38,6 +37,7 @@ class AmbienteEdit extends Component
         ]);
 
         session()->flash('message', 'Ambiente Atualizado com Sucesso.');
+        return redirect()->route('ambiente.list');
     }
 
     public function render()

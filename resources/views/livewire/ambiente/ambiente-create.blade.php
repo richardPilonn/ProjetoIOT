@@ -28,16 +28,17 @@
         </div>
         <div class="mb-3">
             <span style="font-size:20px">
-                <label for="serie_atual" class="form-label">Serie Atual</label>
+                <label for="status" class="form-label">Status</label>
                 <i class="bi bi-briefcase-fill"></i>
             </span>
+
             <select class="form-select" aria-label="default-select example"@error('status') is-invalid @enderror
-                id="staus" wire:model.defer="status" placeholder="Status">
-                <option hidden>Status</option>
-                <option value="1">Ativo</option>
+                id="status" wire:model.defer="status" placeholder="Insira Seu Status">
+                <option hidden>Selecione Seu Status</option>
                 <option value="0">Inativo</option>
+                <option value="1">Ativo</option>
             </select>
-            @error('serie_atual')
+            @error('status')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
