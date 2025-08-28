@@ -8,7 +8,7 @@ use Livewire\Component;
 class SensorEdit extends Component
 {
 
-
+    public $sensorId;
     public $ambiente_id;
     public $codigo;
     public $tipo;
@@ -20,9 +20,9 @@ class SensorEdit extends Component
     {
         return [
             'ambiente_id' => 'required|integer',
-            'codigo' => 'required|string|unique:sensors,codigo',
+            'codigo' => 'required|string|unique:sensors,codigo,' . $this->sensorId,
             'tipo' => 'required|string|',
-            'descricao' => 'required|text|',
+            'descricao' => 'required|',
             'status' => 'boolean',
 
         ];
@@ -40,7 +40,6 @@ class SensorEdit extends Component
         'tipo.string' => 'O campo tipo tem q ser um texto Válido',
 
         'descricao.required' => 'A descrição é necessaria',
-        'descricao.text' => 'O campo descrição tem q ser um texto Válido',
         
         'status.boolean' => 'Apenas os valores true e false são permitidos.' 
     ];
@@ -50,8 +49,9 @@ class SensorEdit extends Component
         $sensor = Sensor::find($id);
         if ($sensor == null) {
             session()->flash('error', 'Sensor Não Encontrado');
-            return redirect()->route('Sensor.list');
+            return redirect()->route('sensors.list');
         } else {
+            $this->sensorId = $sensor->id;
             $this->ambiente_id = $sensor->ambiente_id;
             $this->codigo = $sensor->codigo;
             $this->tipo = $sensor->tipo;
@@ -77,7 +77,7 @@ class SensorEdit extends Component
        
 
         session()->flash('message', 'Sensor atualizado com sucesso');
-        return redirect()->route('Sensor.List');
+        return redirect()->route('sensors.list');
     }
 
     public function render()

@@ -16,29 +16,27 @@ class SensorCreate extends Component
     public $status;
 
     protected $rules = [
-        'ambiente_id' => 'required|integer',
-        'codigo' => 'required|string|unique:sensors,codigo',
+        'ambiente_id' => 'required',
+        'codigo' => 'required|unique:sensors,codigo',
         'tipo' => 'required|string|',
-        'descricao' => 'required|text|',
-        'status' => 'boolean',
-
+        'status' => 'required',
+        'descricao' => 'required',
     ];
 
     protected $messages = [
         'ambiente_id.required' => 'É Necessario o ID do ambiente',
-        'ambiente_id.integer' => 'O campo ID tem que ser do tipo inteiro',
+        //'ambiente_id.integer' => 'O campo ID tem que ser do tipo inteiro',
 
-        'codigo,required' => 'É Necessario o codigo',
+        'codigo.required' => 'É Necessario o codigo',
         'codigo.string' => 'O campo codigo tem q ser um texto Válido',
         'codigo.unique' => 'Este codigo já está cadastrado.',
 
-        'tipo,required' => 'É Necessario o tipo do sensor',
+        'tipo.required' => 'É Necessario o tipo do sensor',
         'tipo.string' => 'O campo tipo tem q ser um texto Válido',
 
         'descricao.required' => 'A descrição é necessaria',
-        'descricao.text' => 'O campo descrição tem q ser um texto Válido',
-        
-        'status.boolean' => 'Apenas os valores true e false são permitidos.' 
+        'status.required' => 'status é obrigatorio'
+
     ];
 
     public function store()
@@ -46,7 +44,8 @@ class SensorCreate extends Component
 
         $this->validate();
 
-    
+
+
         if ($this->status !== null) {
             Sensor::create([
                 'ambiente_id' => $this->ambiente_id,
@@ -65,6 +64,7 @@ class SensorCreate extends Component
 
     public function render()
     {
-        return view('livewire.sensores.sensor-create');
+        $ambientes = Ambiente::all();
+        return view('livewire.sensores.sensor-create', compact('ambientes'));
     }
 }
