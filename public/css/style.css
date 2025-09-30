@@ -6,6 +6,10 @@
     --text-default: #1e293b;
 }
 
+.error-field {
+    color: red;
+}
+
 body {
     font-family: "Segoe UI";
     background-color: var(--muted-bg);
