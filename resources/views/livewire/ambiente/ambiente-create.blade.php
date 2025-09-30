@@ -44,6 +44,6 @@
         </div>
 
         <button type="submit" class="btn btn-success">Cadastrar</button>
-        <a href="{{ route('ambiente.create') }}" class="btn btn-secondary ms-2">Cancelar</a>
+        <a href="{{ route('ambiente.list') }}" class="btn btn-secondary ms-2">Cancelar</a>
     </form>
 </div>

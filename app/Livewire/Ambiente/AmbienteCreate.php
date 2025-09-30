@@ -12,9 +12,21 @@ class AmbienteCreate extends Component
     public $descricao;
     public $status;
 
+    protected $rules = [
+        'nome' => 'required|min:3|',
+        'descricao' => 'required',
+    ];
+
+    protected $messages = [
+        'nome.required' => 'O nome é necessario',
+        'nome.min' => 'Necessário ter pelo menos 3 caracteres',
+
+        'descricao.required' => 'A descrição é necessaria',
+    ];
+
     public function store()
     {
-
+        $this->validate();
         if ($this->status !== null) {
 
 

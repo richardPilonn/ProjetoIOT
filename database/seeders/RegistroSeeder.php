@@ -29,8 +29,14 @@ class RegistroSeeder extends Seeder
         $dataAtual = Carbon::now('America/Sao_Paulo')->subMonth();
         $dataFinal = Carbon::now('America/Sao_Paulo');
 
-        while ($dataAtual->lessThanOrEqualTo($dataFinal)) {
+        $count = 0; // Inicializa o contador
+
+        while ($dataAtual->lessThanOrEqualTo($dataFinal) && $count < 60) {
             foreach ($sensores as $sensor) {
+                if ($count >= 60) { // Condição de parada dentro do loop interno
+                    break 2; // Interrompe ambos os loops
+                }
+
                 $tipo = $sensor->tipo;
 
                 $unidade = $unidadesPorTipo[$tipo] ?? '';
@@ -49,7 +55,7 @@ class RegistroSeeder extends Seeder
                         $valor = $faker->randomElement(['ON', 'OFF']);
                         break;
                     default:
-                        $valor = $faker->randomFloat(2, 0 , 100);
+                        $valor = $faker->randomFloat(2, 0, 100);
                         break;
                 }
                 Registro::create([
@@ -58,6 +64,8 @@ class RegistroSeeder extends Seeder
                     'unidade' => $unidade,
                     'data_hora' => $dataAtual->format('Y-m-d H:i:s')
                 ]);
+
+                $count++; // Incrementa o contador a cada registro criado
             }
             $dataAtual->addMinutes(10);
         }
