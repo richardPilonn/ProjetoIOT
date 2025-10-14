@@ -15,6 +15,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @elseif (session()->has('message'))
+        {{-- MENSAGEM DO TOGGLE APARECE AQUI --}}
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
@@ -42,7 +43,7 @@
                 <th>Tipo</th>
                 <th>Descrição</th>
                 <th>Codigo</th>
-                <th>Status</th>
+                <th>Status (Controle)</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -54,13 +55,21 @@
                     <td>{{ $s->tipo }}</td>
                     <td>{{ $s->descricao }}</td>
                     <td>{{ $s->codigo }}</td>
-                    <td>{{ $s->status == 1 ? 'Ativo' : 'Inativo' }}</td>
+                    <td>
+                        <div class="form-check form-switch d-flex align-items-center m-8">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                id="sensorSwitch{{ $s->id }}" wire:click="toggleStatus({{ $s->id }})"
+                                {{ $s->status == 1 ? 'checked' : '' }}>
+                            <label class="form-check-label ms-2" for="sensorSwitch{{ $s->id }}">
+                                {{ $s->status == 1 ? 'Ligado' : 'Desligado' }}
+                            </label>
+                        </div>
+                    </td>
                     <td>
                         <a href="{{ route('sensors.edit', $s->id) }}" class="btn btn-sm btn-warning" title="Editar">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                         <a href="{{ route('sensors.delete', $s->id) }}" class="btn btn-sm btn-danger"
-                            title="Excluir">
+                        <a href="{{ route('sensors.delete', $s->id) }}" class="btn btn-sm btn-danger" title="Excluir">
                             <i class="bi bi-trash3-fill"></i>
                         </a>
                     </td>
