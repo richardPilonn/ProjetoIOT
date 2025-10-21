@@ -43,7 +43,7 @@
                 <th>Tipo</th>
                 <th>Descrição</th>
                 <th>Codigo</th>
-                <th>Status (Controle)</th>
+                <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -61,7 +61,7 @@
                                 id="sensorSwitch{{ $s->id }}" wire:click="toggleStatus({{ $s->id }})"
                                 {{ $s->status == 1 ? 'checked' : '' }}>
                             <label class="form-check-label ms-2" for="sensorSwitch{{ $s->id }}">
-                                {{ $s->status == 1 ? 'Ligado' : 'Desligado' }}
+                                {{ $s->status == 1 ? 'Ativo' : 'Inativo' }}
                             </label>
                         </div>
                     </td>

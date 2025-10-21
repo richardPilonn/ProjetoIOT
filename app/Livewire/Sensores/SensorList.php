@@ -6,7 +6,7 @@ use App\Models\Sensor;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class SensorList extends Component
+class SensorList extends Component  
 {
     use WithPagination;
     public $search ='';
@@ -29,6 +29,8 @@ class SensorList extends Component
         // 2. Inverte o valor da coluna 'status'.
         // Se for 1, vira 0. Se for 0, vira 1.
         $sensor->status = $sensor->status ? 0 : 1;
+
+        
         
         // 3. Salva a mudança no banco de dados.
         $sensor->save();
