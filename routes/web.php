@@ -4,12 +4,16 @@
 use App\Livewire\Ambiente\AmbienteCreate;
 use App\Livewire\Ambiente\AmbienteEdit;
 use App\Livewire\Ambiente\AmbienteList;
+use App\Livewire\Auth\Login;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/', Login::class)->name('login');
+
 Route::prefix('ambiente')->group(function () {
-    Route::get('/', AmbienteList::class)->name('ambiente.list');
-    Route::get('/create', AmbienteCreate::class)->name('ambiente.create');
-    Route::get('/{id}/edit', AmbienteEdit::class)->name('ambientes.edit');
+    Route::get('/', AmbienteList::class)->middleware('auth', 'user_type:user')->name('ambiente.list');
+    Route::get('/create', AmbienteCreate::class)->middleware('auth', 'user_type:user')->name('ambiente.create');
+    Route::get('/{id}/edit', AmbienteEdit::class)->middleware('auth', 'user_type:user')->name('ambientes.edit');
 });
 
 
@@ -21,12 +25,12 @@ use App\Livewire\Sensores\SensorEdit;
 use App\Livewire\Sensores\SensorList;
 
 
-Route::get('/', Dashboard::class);
+Route::get('/dashboard', Dashboard::class)->middleware('auth', 'user_type:user')->name('Dashboard');
 
-Route::get('/sensor/create', SensorCreate::class)->name('sensors.create');
-Route::get('/sensor/{id}/edit', SensorEdit::class)->name('sensors.edit');
-Route::get('/sensor/list', SensorList::class)->name('sensors.list');
-Route::get('/sensor/{id}/delete', SensorDelete::class)->name('sensors.delete');
+Route::get('/sensor/create', SensorCreate::class)->middleware('auth', 'user_type:user')->name('sensors.create');
+Route::get('/sensor/{id}/edit', SensorEdit::class)->middleware('auth', 'user_type:user')->name('sensors.edit');
+Route::get('/sensor', SensorList::class)->middleware('auth', 'user_type:user')->name('sensors.list');
+Route::get('/sensor/{id}/delete', SensorDelete::class)->middleware('auth', 'user_type:user')->name('sensors.delete');
 
-Route::get('/registro/list', RegistroList::class)->name('registro.list');
+Route::get('/registro', RegistroList::class)->middleware('auth', 'user_type:user')->name('registro.list');
 

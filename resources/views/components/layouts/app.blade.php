@@ -27,8 +27,10 @@
             <div class="nav-section-title">Menu Principal</div>
 
             <nav class="nav flex-column px-2">
-                <a href="#" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
-                <a href="#" class="nav-link"><i class="bi bi-building"></i> Ambientes</a>
+                <a href="dashboard" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                <a href="ambiente" class="nav-link"><i class="bi bi-building"></i> Ambientes</a>
+                <a href="sensor" class="nav-link"><i class="bi bi-binoculars"></i> Sensores</a>
+                <a href="registro" class="nav-link"><i class="bi bi-database-add"></i> Registros</a>
                 <a href="#" class="nav-link"><i class="bi bi-people"></i> Usuários</a>
                 <a href="#" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Alertas</a>
                 <a href="#" class="nav-link"><i class="bi bi-gear"></i>Configurações</a>
